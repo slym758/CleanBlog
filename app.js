@@ -1,13 +1,25 @@
-import express from "express";
-
+const express = require("express");
 const app = express();
 
+app.set("view engine", "ejs");
+
+//MIDDLEWARS
+app.use(express.static("public"));
+
+//ROUTES
 app.get("/", (req, res) => {
-  const blog = { id: 1, title: "Blog title", description: "Blog description" };
-  res.send(blog);
+  res.render("index");
 });
 
-const port = 3000;
+app.get("/about", (req, res) => {
+  res.render("about");
+});
+
+app.get("/add_post", (req, res) => {
+  res.render("add_post");
+});
+
+const port = 5000;
 
 app.listen(port, () => {
   console.log(`Sunucu ${port} portunda başlatıldı`);
